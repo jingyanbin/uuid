@@ -187,17 +187,14 @@ func NewUUIDGenerator(workerId, workerIdBits, epoch int, latest bool, unsigned b
 	return generator
 }
 
-//const hexIncrBits = 8
 const hexIndexBits = 20
 const hexTimeBits = 43
 const hexTimeSignBits = 1
 
-//const hexIncrMax = 1<<hexIncrBits - 1
 const hexIndexMax = 1<<hexIndexBits - 1
 const hexTimeMax = 1<<hexTimeBits - 1
 const hexTimeMin = -1 << hexIndexBits
 
-//const hexIndexShift = hexIncrBits
 const hexTimeShift = hexIndexBits
 
 var hexDateTimeMax = datetime.UnixToYmdHMS(defaultEpoch+hexTimeMax, timezone.Local())
@@ -212,11 +209,6 @@ type HexGenerator struct {
 	seed     byte
 	incr     uint8
 	latest   bool
-
-	timeMax        int64
-	timeMin        int64
-	hexDateTimeMax int64
-	hexDateTimeMin int64
 }
 
 func (m *HexGenerator) getTimeIndex() (int64, int64) {
