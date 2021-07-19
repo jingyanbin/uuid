@@ -363,6 +363,10 @@ func (m *HexGenerator) DeUUIDExtra(uuid string) (ms int64, index int, workerId u
 	return
 }
 
+//workerId: 服务进程唯一ID 范围: 0~65535
+//seed: bcc计算初始值
+//latest: 是否使用最新时间生成ID
+//incr: 单次启动id+1(避免时间回调重复生成id,如果反复回调时间超过incr上限还是会出现ID重复生成)
 func NewHexGenerator(workerId uint16, seed uint8, incr uint8, latest bool) *HexGenerator {
 	generator := &HexGenerator{lastTime: datetime.UnixMs(), workerId: int64(workerId), seed: seed, incr: incr, latest: latest}
 	return generator
